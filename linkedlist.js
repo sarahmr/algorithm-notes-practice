@@ -14,60 +14,6 @@
 //         - double linked list
 //             - links to both next and previous element
 
-```java
-
-public class Node { 
-	Node next;
-	int data;
-	public Node(int data) {
-		this.data = data
-	}
-}
-
-public class LinkedList {
-	Node head; 
-
-	public void append(int data) { 
-		if (head == null) {
-			head = new Node(data);
-		return;
-		}
-		Node current = head;
-		while (current.next != null) {
-			current = current.next;
-		}
-		current.next = new Node(data);
-	}
-
-	public void prepend(int data) {
-		Node newHead = new Node(data);
-		newHead.next = head;
-		head = newHead;
-	}
-
-	public void deleteWithValue(int data) {
-		if (head == null) return;
-		if (head.data == data) {
-			head = head.next;
-			return;
-		}
-		
-		Node current = head;
-		while (current.next != null) {
-			if (current.next.data == data) {
-				current.next = current.next.next;
-				return;
-			}
-			current = current.next;
-		}
-	}
-}
-		
-
-```
-
-// retype java into javascript
-
 class Node {
   constructor(value, next = null) {
     this.value = value;
@@ -76,5 +22,105 @@ class Node {
 }
 
 class LinkedList {
+  constructor(head = null) {
+    this.head = head;
+  }
 
+  // time complexity O(n); linear time
+  append = (value) => {
+    if (this.head === null) {
+      return null
+    }
+
+    let current = this.head
+    while (current.next !== null) {
+      current = current.next
+    }
+    current.next = new Node(value)
+  }
+  
+  // time complexity O(1); constant time
+  prepend = (value) => {
+    let newHead = new Node(value)
+
+    newHead.next = this.head
+
+    this.head = newHead
+  }
+
+  deleteWithValue = (value) => {
+    if (this.head === null) {
+      return;
+    }
+
+    if (this.head.value === value) {
+      this.head = this.head.next
+      return;
+    }
+
+    let current = this.head
+    while (current.next !== null) {
+      if (current.next.value === value) {
+        current.next = current.next.next
+        return
+      }
+      current = current.next
+    }
+  }
+  
+  printList = () => {
+    let currentNode = list.head
+    // let nodeList = []
+    let nodeList = ''
+    while (currentNode) {
+      // nodeList.push(currentNode.value)
+      // currentNode.next ? nodeList += `${currentNode.value}, ` : nodeList += currentNode.value
+      nodeList += String(currentNode.value)
+      if (currentNode.next) {
+        nodeList += ", "
+      }
+      currentNode = currentNode.next
+    }
+    // nodeList = nodeList.join(', ')
+    console.log(nodeList)
+  }
+  
+  // time complexity O(1); constant time
+  insertAfter = (newValue, node) => {
+    let newNode = new Node(newValue)
+    
+    if (node === null) {
+      return null
+    }
+    
+    newNode.next = node.next
+    
+    node.next = newNode
+  }
 }
+
+let list = new LinkedList
+
+let first = new Node(1)
+
+let second = new Node(2)
+
+let third = new Node(3)
+
+list.head = first
+
+list.head.next = second
+
+second.next = third
+
+list.prepend(4)
+
+list.append(56)
+
+list.insertAfter(9, second)
+
+list.printList() 
+
+list.deleteWithValue(4)
+
+list.printList()
