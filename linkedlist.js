@@ -1,12 +1,12 @@
-// - JS Algoritions Repo
-//     - Linked List
-//         - linked list: a linear collection of data elements in which linear order is not        given by their physical placement in memory
+// Linked List notes:
+//     - notes from JS algos repo:
+//         - linked list: a linear collection of data elements in which order is not given by their physical placement in memory
 //         - each element points to the next
-//         - a group of nodes which togetehr represent a sequence
+//         - a group of nodes which together represent a sequence
 //         - each node has data and a reference to the next node
 //         - efficient insertion or removal of elements from any position in the sequence;
 //         - drawback is that access time is linear, random access is not feasible
-//     - cracking the coding interview youtube video on linked list
+//     - cracking the coding interview video on linked list:
 //         - have to always start at the head of a linked list
 //         - O(1) insert or delete from beginning
 //         - O(n) insert or delete from end
