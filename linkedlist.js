@@ -1,18 +1,20 @@
-// Linked List notes:
-//     - notes from JS algos repo:
-//         - linked list: a linear collection of data elements in which order is not given by their physical placement in memory
-//         - each element points to the next
-//         - a group of nodes which together represent a sequence
-//         - each node has data and a reference to the next node
-//         - efficient insertion or removal of elements from any position in the sequence;
-//         - drawback is that access time is linear, random access is not feasible
-//     - cracking the coding interview video on linked list:
-//         - have to always start at the head of a linked list
-//         - O(1) insert or delete from beginning
-//         - O(n) insert or delete from end
-//         - O(n) to find elements
-//         - double linked list
-//             - links to both next and previous element
+/*
+Linked List notes:
+    - notes from JS algos repo:
+        - linked list: a linear collection of data elements in which order is not given by their physical placement in memory
+        - each element points to the next
+        - a group of nodes which together represent a sequence
+        - each node has data and a reference to the next node
+        - efficient insertion or removal of elements from any position in the sequence;
+        - drawback is that access time is linear, random access is not feasible
+    - cracking the coding interview video on linked list:
+        - have to always start at the head of a linked list
+        - O(1) insert or delete from beginning
+        - O(n) insert or delete from end
+        - O(n) to find elements
+        - double linked list
+            - links to both next and previous element
+*/
 
 class Node {
   constructor(value, next = null) {
@@ -124,3 +126,32 @@ list.printList()
 list.deleteWithValue(4)
 
 list.printList()
+
+// reverse list
+
+// solution 1: iterative
+let reverseList = function(head) {
+  let previousNode = null
+  let currentNode = head
+  while (currentNode) {
+      let tempNext = currentNode.next
+      currentNode.next = previousNode
+      previousNode = currentNode
+      currentNode = tempNext
+  }
+  return previousNode
+};
+
+// solution 2: recursive
+
+var reverseList = function(head) {
+  if (head === null || head.next === null) {
+      return head
+  }
+  let p = reverseList(head.next)
+  
+  head.next.next = head
+  head.next = null
+  return p
+  
+};
