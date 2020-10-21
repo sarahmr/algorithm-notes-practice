@@ -103,3 +103,38 @@ let makeAnagram = (a, b) => {
 
   return total
 }
+
+// ---------------------- count a's -------------------------------
+// https://www.hackerrank.com/challenges/repeated-string/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup&h_r=next-challenge&h_v=zen
+
+
+function repeatedString(s, n) {
+  // if s is "a", return n
+  if (s === "a") {
+      return n
+  }
+
+  // get length of s; get n; how many times does s occur in n? how many a's are in s?
+  let sCount = Math.floor(n/s.length)
+
+  // what to do about remainder?
+  let remainder = n % s.length
+
+  let aInS = 0
+  let aInRemains = 0
+
+  // number of a's in s times sCount plus number of a's in remainder section of s
+  for (let i = 0; i < s.length; i++) {
+      if (s[i] === "a") {
+          aInS += 1
+      }
+  }
+
+  for (let i = 0; i < remainder; i++) {
+      if (s[i] === "a") {
+          aInRemains += 1
+      }
+  }
+
+  return (aInS * sCount) + aInRemains
+}

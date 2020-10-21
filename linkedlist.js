@@ -127,7 +127,7 @@ list.deleteWithValue(4)
 
 list.printList()
 
-// reverse list
+// ---------------------- reverse list -----------------------------------------------
 
 // solution 1: iterative
 let reverseList = function(head) {
@@ -155,3 +155,22 @@ var reverseList = function(head) {
   return p
   
 };
+
+// ---------------------- insert at position ------------------------------
+
+function insertNodeAtPosition(head, data, position) {
+  let current = head
+  let counter = 1
+
+  while (current.next) {
+      if (counter !== position) {
+          current = current.next
+          counter += 1
+      } else {
+          let newNode = new SinglyLinkedListNode(data)
+          newNode.next = current.next
+          current.next = newNode
+          return head
+      }
+  }
+}

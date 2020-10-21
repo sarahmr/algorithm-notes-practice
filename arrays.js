@@ -254,3 +254,64 @@ function diagonalDifference(arr) {
   let difference = Math.abs(sum1 - sum2)
   return difference
 }
+
+// -------------------- Matching Socks -----------------------------
+// https://www.hackerrank.com/challenges/sock-merchant/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
+
+function sockMerchant(n, ar) {
+  // less than 2 socks:
+  if (n < 2) {
+      return 0
+  }
+  // make an object that counts each color of sock
+  // take each pair and divide value by 2, total pairs go up for each pair
+
+  let totalPairs = 0
+  let totalObject = {}
+
+  for (let i = 0; i < ar.length; i++) {
+      if (!totalObject[ar[i]]) {
+          totalObject[ar[i]] = 1
+      } else {
+          totalObject[ar[i]] += 1
+      }
+  }
+
+ // console.log(totalObject)
+
+  for (let props in totalObject) {
+      totalPairs += Math.floor(totalObject[props] / 2 )
+  }
+
+  return totalPairs
+}
+
+// ------------------- jumping clouds --------------------------
+// https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup&h_r=next-challenge&h_v=zen
+
+function jumpingOnClouds(c) {
+  // count jumps
+  // short paths take more 2 step jumps than 1 step
+  // take two steps except if a thunderhead
+
+  let jumps = 0
+
+  // track the index of current cloud
+  let i = 0
+  let current = c[i]
+
+
+  while (i < c.length - 1) {
+      if (c[i + 2] === 0) {
+          jumps += 1
+          i += 2
+          current = c[i + 2]
+      }  else {
+          jumps += 1
+          i += 1
+          current = c[i + 1]
+      }
+  }
+
+  return jumps
+}
