@@ -114,7 +114,7 @@ function repeatedString(s, n) {
       return n
   }
 
-  // get length of s; get n; how many times does s occur in n? how many a's are in s?
+  // get length of s; get n; how many times does s occur in n?
   let sCount = Math.floor(n/s.length)
 
   // what to do about remainder?
@@ -137,4 +137,43 @@ function repeatedString(s, n) {
   }
 
   return (aInS * sCount) + aInRemains
+}
+
+// ---------------- unique char ------------------------------------------
+// O(n**2) time O(1) space
+let uniqueChar = (string) => {
+  if (string.length === 1) {
+    return "yes"
+  }
+
+  for (let i = 0; i < string.length; i++) {
+    for (let j = i+1; j < string.length; j++) {
+      if (string[i] === string[j]) {
+        return "no"
+      }
+    }
+  }
+
+  return "yes"
+}
+
+// solution fron CCI; assumes ASCII but not extended ASCII; time complexity O(n); space O(1)
+
+let isUniqueChars = (str) => {
+  if (str.length > 128) {
+    return false
+  }
+
+  let charSet = {}
+
+  for (let i = 0; i < str.length; i++) {
+    let val = str[i]
+
+    if (charSet[val]) {
+      return false
+    }
+    charSet[val] = true
+  }
+
+  return true
 }

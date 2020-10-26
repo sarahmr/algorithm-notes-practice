@@ -59,43 +59,83 @@ function height(root) {
 }
 
 
-// ----------------- lowest common ancestor -------------------------------------
+// ----------------- lowest common ancestor (BST) -------------------------------------
 // time complexity: O(n)
 
-let answer = null
-
-let recurseTree = (current, p, q) => {
-    if (current === null) {
-        return false
-    }
-    
-    // returns true if mid was true on previous call
-    let left = recurseTree(current.left, p, q) ? 1 : 0
-    
-    let right = recurseTree(current.right, p, q) ? 1 : 0
-    
-    // returns true when you get to the value
-    let mid = current === p || current === q ? 1 : 0
-    
-    if (mid + left + right >= 2) {
-        answer = current
-    }
-
-    return (mid + left + right > 0)
-}
+// recursive
 
 var lowestCommonAncestor = function(root, p, q) {
-    recurseTree(root, p, q)
-    return answer
+  // value of current node or parent node
+  let parentVal = root.val
+  
+  // value of p
+  let pVal = p.val
+
+  // value of q  
+  let qVal = q.val
+  
+  if (pVal > parentVal && qVal > parentVal) {
+      return lowestCommonAncestor(root.right, p, q)
+  } else if (pVal < parentVal && qVal < parentVal) {
+      return lowestCommonAncestor(root.left, p, q)
+  } else {
+      return root
+  }
 };
 
-// alternate recursive
+// iterative
 
-const lowestCommonAncestor = (root, p, q) => {
-	if (!root || root === p || root === q) { return root; }
-	
-	let left = lowestCommonAncestor(root.left, p, q);
-	let right=  lowestCommonAncestor(root.right, p, q);
-	
-	return (left && right) ? root : (left ? left : right);
+var lowestCommonAncestor = function(root, p, q) {
+  let pVal = p.val;
+  let qVal = q.val
+  
+  let current = root
+  
+  while (current !== null) {
+      let parentVal = current.val
+      
+      if (pVal > parentVal && qVal > parentVal) {
+          current = current.right
+      } else if (pVal < parentVal && qVal < parentVal) {
+          current = current.left
+      } else {
+          return current
+      }
+  }
+  return null
+};
+
+// ------------------------ valid BST --------------------------------------
+// to be a valid BST:
+// - everything to the left must be lower than the root and the node (and grandparent, etc.)
+// - everything to the right must be higher than the root and the node (and grandparent, etc.)
+
+let helper = (node, lower, upper) => {
+  if (node === null) {
+      return true
+  }
+  
+  let val = node.val
+  
+  if (lower !== null && val <= lower) {
+      return false
+  }
+  
+  if (upper !== null && val >= upper) {
+      return false
+  }
+  
+  if (!helper(node.right, val, upper)) {
+      return false
+  }
+  
+  if (!helper(node.left, lower, val)) {
+      return false
+  }
+  
+  return true;
 }
+
+var isValidBST = function(root) {
+  return helper(root, null, null)
+};

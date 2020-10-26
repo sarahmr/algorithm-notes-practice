@@ -5,7 +5,7 @@ let removeDuplicates = function(nums) {
   if (nums.length === 0) {
     return null;
   }
-  // number of unique elements
+  // compare indexes next to each other; shift when finding unique elements
   let i = 0;
   for (j = 1; j < nums.length; j++) {
     if (nums[j] !== nums[i]) {
@@ -13,6 +13,7 @@ let removeDuplicates = function(nums) {
       nums[i] = nums[j];
     }
   }
+  // add 1 to end to get total length of unique elements as i is moving through indexes not counting
   return i + 1;
 };
 
@@ -51,6 +52,7 @@ var twoSum = function(nums, target) {
       return solution
     }
   }
+
   return solution;
 };
 
@@ -150,7 +152,7 @@ let rotate = function(nums, k) {
     let current = start;
     let prev = nums[start]
 
-    while (start != current) {
+    while (start !== current) {
       let next = (current + k) % nums.length
       let temp = nums[next]
       nums[next] = prev
@@ -211,9 +213,9 @@ let sumForHourglass = (arr, row, col) => {
     throw new Error ("col out of bounds")
   }
 
-  return arr[row][col], arr[row][col + 1], arr[row][col + 2], 
-  arr[row+1][col+1], 
-  arr[row+2][col], arr[row+2][col+1], arr[row+2][col+2]  
+  return arr[row][col] + arr[row][col + 1] + arr[row][col + 2] + 
+  arr[row+1][col+1] + 
+  arr[row+2][col] + arr[row+2][col+1] + arr[row+2][col+2]  
 }
 
 let hourglassSum = (arr) => {
@@ -301,7 +303,7 @@ function jumpingOnClouds(c) {
   let current = c[i]
 
 
-  while (i < c.length - 1) {
+  while (i > c.length - 1) {
       if (c[i + 2] === 0) {
           jumps += 1
           i += 2
@@ -314,4 +316,27 @@ function jumpingOnClouds(c) {
   }
 
   return jumps
+}
+
+// --------------------- rotate left -----------------------------------
+
+// https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
+
+function rotLeft(a, d) {
+  let newArr = []
+
+  for (let i = d; i < a.length; i++) {
+      newArr.push(a[i])
+  }
+
+  if (newArr.length < a.length) {
+      let i = 0
+      while (newArr.length < a.length) {
+          newArr.push(a[i])
+          i++
+      }
+  }
+
+  return newArr
+
 }

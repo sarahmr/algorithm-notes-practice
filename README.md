@@ -5,3 +5,5 @@ Contents:
 - linked list
 - strings
 - trees
+- dictionaries and hashmaps
+- sets

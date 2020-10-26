@@ -101,32 +101,6 @@ class LinkedList {
   }
 }
 
-let list = new LinkedList
-
-let first = new Node(1)
-
-let second = new Node(2)
-
-let third = new Node(3)
-
-list.head = first
-
-list.head.next = second
-
-second.next = third
-
-list.prepend(4)
-
-list.append(56)
-
-list.insertAfter(9, second)
-
-list.printList() 
-
-list.deleteWithValue(4)
-
-list.printList()
-
 // ---------------------- reverse list -----------------------------------------------
 
 // solution 1: iterative
