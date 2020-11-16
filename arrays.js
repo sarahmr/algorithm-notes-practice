@@ -340,3 +340,79 @@ function rotLeft(a, d) {
   return newArr
 
 }
+
+// ---------------- largest subarray sum ----------------------------
+function largestSubarraySum(arr) {
+  // naive solution: find sums of all subarrays
+  let max = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j <= arr.length; j++) {
+      let sum = arr.slice(i, j).reduce((acc, cur) => {
+        return acc + cur
+      })
+      if (sum > max) {
+        max = sum
+      }
+    }
+  }
+  return max
+}
+
+var maxSubArray = function(nums) {
+  let max = nums[0]
+  let max_here = 0
+  
+  for (let i = 0; i < nums.length; i++){
+      max_here += nums[i]
+      if (max_here > max) {
+          max = max_here
+      } 
+      if (max_here < 0) {
+          max_here = 0
+      }
+  }
+  return max
+};
+
+// -------------------- are there dupes? -------------------------------------
+// O(n) time complexity
+
+var containsDuplicate = function(nums) {
+  let numsMap = {}
+  
+  for (let i = 0; i < nums.length; i++) {
+      if (!numsMap[nums[i]]) {
+          numsMap[nums[i]] = true
+      } else {
+          return true
+      }
+  }
+  
+  return false
+};
+
+
+// ------------------ find the single number in an array -----------------------------------
+
+var singleNumber = function(nums) {
+  if (nums.length === 1) {
+      return nums[0]
+  }
+  
+  let numsMap = {}
+  
+  for (let i = 0; i < nums.length; i++) {
+      if (!numsMap[nums[i]]) {
+          numsMap[nums[i]] = 1
+      } else {
+          numsMap[nums[i]] += 1
+      }
+  }
+  
+  for (let i = 0; i < nums.length; i++) {
+      if (numsMap[nums[i]] === 1) {
+          return nums[i]
+      }
+  }
+};
