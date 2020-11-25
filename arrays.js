@@ -416,3 +416,94 @@ var singleNumber = function(nums) {
       }
   }
 };
+
+// ---------------- duplicate zeros ----------------------------------
+
+// brute force O(n*2)
+
+var duplicateZeros = function(arr) {
+  for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === 0) {
+          for (let j = arr.length - 1; j >= i + 1; j--) {
+              if (j + 1 > arr.length - 1) {
+                  continue
+              } else {
+                  arr[j + 1] = arr[j]
+              }
+          }
+          if (i < arr.length - 1) {
+              arr[i + 1] = 0   
+          }
+          i = i + 1
+      }
+  }
+  return arr
+};
+
+// O(n) -- two pass
+
+var duplicateZeros = function(arr) {
+  let possibleDupes = 0
+  let length = arr.length - 1
+  
+  // find number of zeros to be duplicated; stop when length exceeds original array length
+  for (let left = 0; left <= length - possibleDupes; left++) {
+      // count zeros
+      if (arr[left] === 0) {
+          // edge case: zero can't be duplicated--no more space
+          if (left === length - possibleDupes) {
+              arr[length] = 0
+              length -= 1
+              break
+          }
+          possibleDupes += 1
+      }
+  }
+  
+  // start from the last index that will be in the modified array
+  let last = length - possibleDupes
+  
+  for (let i = last; i >= 0; i--) {
+      if (arr[i] === 0) {
+          arr[i + possibleDupes] = 0
+          possibleDupes -= 1
+          arr[i + possibleDupes] = 0
+      } else {
+          arr[i + possibleDupes] = arr[i]
+      }
+  }
+  return arr
+};
+
+// ------------ merge sorted arrays ----------------------------
+
+var merge = function(nums1, m, nums2, n) {
+  let end1 = m - 1
+  let end2 = n - 1
+  let totalLength = m + n - 1
+  
+  console.log(end1, end2, totalLength)
+  
+  while (end1 >= 0 && end2 >= 0) {
+      if (nums1[end1] > nums2[end2]) {
+          nums1[totalLength] = nums1[end1]
+          end1 -= 1
+          totalLength -= 1
+      } else {
+          nums1[totalLength] = nums2[end2]
+          end2 -= 1
+          totalLength -= 1
+      }
+      console.log(nums1)
+  }
+  
+  while (end2 >= 0) {
+      nums1[totalLength--] = nums2[end2--]
+  }
+  return nums1
+};
+
+// // nums1 = [1,2,3,0,0,0], m = 3
+// nums2 = [2,5,6],       n = 3
+
+// nums1 = [0] m = 0 nums2 = [1] n = 1
