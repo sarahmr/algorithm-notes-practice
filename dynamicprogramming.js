@@ -67,3 +67,116 @@ var climbStairs = function(n) {
 
   return dp[n]
 };
+
+// space optimization of above
+
+var climbStairs = function(n) {
+  // array takes up a lot of space, instead track 3 variables
+  let a = 1
+  let b = 1
+  let c = 0
+  
+  for (let i = 2; i <= n; i++) {
+      c = a + b
+
+      a = b
+      b = c
+  }
+
+  return c
+};
+
+// variation; 3 steps; add f(n - 3) to recurrence function
+
+var climbStairs = function(n) {
+  // make a dp array & populate it
+  let dp = []
+  dp.fill(0, 0, n)
+  
+  // edge cases
+  dp[0] = 1
+  dp[1] = 1
+  dp[2] = 2
+  
+  for (let i = 3; i <= n; i++) {
+      dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+  }
+
+  return dp[n]
+};
+
+// variation; k steps
+// change in recurrence function
+// -- f(n - 1) + f(n - 2) + ... + f(n - k)
+
+let climbStairs = (n, k) => {
+  let dp = []
+  dp.fill(0, 0, n)
+
+  // edge cases
+  dp[0] = 1
+  dp[1] = 1
+
+  for (let i = 2; i <= n; i++) {
+    // another loop here to go through until k
+    for (let j = 1; j <= k; j++) {
+      // i - j must be greater than 0
+      if (i - j < 0) {
+        continue
+      }
+      dp[i] += dp[i - j]
+    }
+  }
+
+  return dp[n]
+}
+
+// optimize space for k steps
+
+let climbStairs = (n, k) => {
+  let dp = []
+  dp.fill(0, 0, k)
+
+  // edge cases
+  dp[0] = 1
+
+  for (let i = 1; i <= n; i++) {
+    // another loop here to go through until k
+    for (let j = 1; j < k; j++) {
+      // i - j must be greater than 0
+      if (i - j < 0) {
+        continue
+      }
+      dp[i % k] += dp[(i - j) % k]
+    }
+  }
+
+  return dp[n % k]
+}
+
+// last variation; skip certain stairs; array of bools, stairs
+
+let climbStairs = (n, k, stairs) => {
+  let dp = []
+  dp.fill(0, 0, k)
+
+  // edge cases
+  dp[0] = 1
+
+  for (let i = 1; i <= n; i++) {
+    // another loop here to go through until k
+    for (let j = 1; j < k; j++) {
+      // i - j must be greater than 0
+      if (i - j < 0) {
+        continue
+      }
+      if (stairs[i - 1]) {
+        dp[i % k] = 0
+      } else {
+        dp[i % k] += dp[(i - j) % k]
+      }
+    }
+  }
+
+  return dp[n % k]
+}

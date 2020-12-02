@@ -1,11 +1,15 @@
+// time complexity log2(n)
+
 function binary_search(list, item) {
   let low = 0;
   let high = (list.length) - 1
 
-  while (list <= high) {
+  while (low <= high) {
+    // index of middle
     mid = Math.floor((low + high) / 2)
 
-    guest = list[mid]
+    // value of mid
+    guess = list[mid]
 
     if (guess === item) {
       return mid
