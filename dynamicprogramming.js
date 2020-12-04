@@ -55,7 +55,7 @@ Framework for Solving DP Problems:
 var climbStairs = function(n) {
   // make a dp array & populate it
   let dp = []
-  dp.fill(0, 0, n)
+  dp.fill(0, 0, n + 1)
   
   // edge cases
   dp[0] = 1
@@ -91,7 +91,7 @@ var climbStairs = function(n) {
 var climbStairs = function(n) {
   // make a dp array & populate it
   let dp = []
-  dp.fill(0, 0, n)
+  dp.fill(0, 0, n + 1)
   
   // edge cases
   dp[0] = 1
@@ -111,7 +111,7 @@ var climbStairs = function(n) {
 
 let climbStairs = (n, k) => {
   let dp = []
-  dp.fill(0, 0, n)
+  dp.fill(0, 0, n + 1)
 
   // edge cases
   dp[0] = 1
@@ -179,4 +179,61 @@ let climbStairs = (n, k, stairs) => {
   }
 
   return dp[n % k]
+}
+
+// ---------- climbing stairs variation, cheapest path ------------
+
+let cheapStairs = (n, price) => {
+  let dp = []
+
+  dp.fill(0, 0, n + 1)
+
+  // base cases
+  dp[0] = 0
+  dp[1] = price[1]
+
+  for (let i = 2; i <= n; i++) {
+    // transition function:
+    dp[i] = Math.min(dp[i - 1], dp[i - 2]) + price[i]
+  }
+
+  return dp[n]
+}
+
+// ------- variation from above where you return the path ------------
+
+let cheapStairs = (n, price) => {
+  let dp = []
+  dp.fill(0, 0, n + 1)
+
+  let lastLocation = []
+  lastLocation.fill(0, 0, n + 1)
+
+  // base cases
+  dp[0] = 0
+  dp[1] = price[1]
+
+  for (let i = 2; i <= n; i++) {
+    // transition function:
+    dp[i] = Math.min(dp[i - 1], dp[i - 2]) + price[i]
+
+    if (dp[i - 1] < dp[i - 2]) {
+      lastLocation[i] = i - 1
+    } else {
+      lastLocation[i] = i - 2
+    }
+  }
+
+  let path = []
+
+  for (let curr = n; curr >= 0; curr = lastLocation[curr]) {
+    path.push(curr)
+
+    if (curr === 0) {
+      break
+    }
+  }
+
+  path.reverse()
+  return path
 }

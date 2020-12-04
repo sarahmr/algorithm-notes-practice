@@ -17,7 +17,7 @@ let removeDuplicates = function(nums) {
   return i + 1;
 };
 
-// --------------------------------- two sum -------------------------------------------------
+// --------------------------------- two sum --------------------------------------
 
 // solution 1:
 // time complexity O(n^2). For each element, we try to find its complement by looping through the rest of the array which takes O(n) time. Therefore, the time complexity is O(n^2)
@@ -75,7 +75,7 @@ var twoSum = function(nums, target) {
   return solution;
 };
 
-// ------------------------ best time to buy and sell stock -------------------------------------------
+// ------------------------ best time to buy and sell stock -------------------------
 
 // solution 1: brute force
 class Solution {
@@ -163,7 +163,7 @@ let rotate = function(nums, k) {
   }
 }
 
-// ------------------------------ 2D Array, find max sum of hourglass shape ------------------------------------------------
+// ----------------- 2D Array, find max sum of hourglass shape ---------------------------
 // https://www.hackerrank.com/challenges/2d-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
 
 // solution:
@@ -237,7 +237,7 @@ let hourglassSum = (arr) => {
   return max;
 }
 
-// ------------------------  Diagonal Difference  ------------------------------------------------------------------
+// ------------------------  Diagonal Difference  ----------------------------------
 // https://www.hackerrank.com/challenges/diagonal-difference/problem?utm_campaign=challenge-recommendation&utm_medium=email&utm_source=24-hour-campaign
 
 // solution
@@ -393,7 +393,7 @@ var containsDuplicate = function(nums) {
 };
 
 
-// ------------------ find the single number in an array -----------------------------------
+// ------------------ find the single number in an array -----------------------
 
 var singleNumber = function(nums) {
   if (nums.length === 1) {

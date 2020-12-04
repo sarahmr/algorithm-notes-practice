@@ -1,4 +1,6 @@
-// time complexity log2(n)
+// ------------ binary search ------------
+
+// time complexity O(log2(n))
 
 function binary_search(list, item) {
   let low = 0;
@@ -22,6 +24,31 @@ function binary_search(list, item) {
   }
 
   return null
+}
+
+// recursive method:
+
+let binarySearch = (arr, item) => {
+  let low = 0
+  let high = arr.length - 1
+
+  return search(arr, item, high, low)
+}
+
+let search = (arr, item, high, low) => {
+  if (high >= 1) {
+    let midPoint = Math.floor((low + high) / 2)
+    if (arr[midPoint] === item) {
+      return midPoint
+    }
+    if (arr[midPoint] > item) {
+      return search(arr, item, midPoint - 1, low)
+    }
+    if (arr[midPoint] < item) {
+      return search(arr, item, high, midPoint + 1)
+    }
+  }
+  return -1
 }
 
 // selection sort; array from smallest to largest
