@@ -1,4 +1,5 @@
 // ------------ binary search ------------
+// return the index of where the item is located
 
 // time complexity O(log2(n))
 
@@ -36,19 +37,25 @@ let binarySearch = (arr, item) => {
 }
 
 let search = (arr, item, high, low) => {
-  if (high >= 1) {
-    let midPoint = Math.floor((low + high) / 2)
-    if (arr[midPoint] === item) {
-      return midPoint
-    }
-    if (arr[midPoint] > item) {
-      return search(arr, item, midPoint - 1, low)
-    }
-    if (arr[midPoint] < item) {
-      return search(arr, item, high, midPoint + 1)
-    }
+  // console.log(arr, item, high, low)
+  if (low > high) {
+    return -1
   }
-  return -1
+  
+  let midPoint = Math.floor((low + high) / 2)
+
+  if (arr[midPoint] === item) {
+    return midPoint
+  }
+
+  if (arr[midPoint] > item) {
+    return search(arr, item, midPoint - 1, low)
+  }
+  
+  if (arr[midPoint] < item) {
+    return search(arr, item, high, midPoint + 1)
+  }
+  
 }
 
 // selection sort; array from smallest to largest

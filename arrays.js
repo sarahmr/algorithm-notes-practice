@@ -507,3 +507,17 @@ var merge = function(nums1, m, nums2, n) {
 // nums2 = [2,5,6],       n = 3
 
 // nums1 = [0] m = 0 nums2 = [1] n = 1
+
+// ------------- remove element --------------
+
+var removeElement = function(nums, val) {
+  let k = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+        nums[k] = nums[i];
+        k++;
+    }
+    console.log(nums, k)
+  }
+  return k
+};
