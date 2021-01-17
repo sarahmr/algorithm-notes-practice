@@ -360,5 +360,59 @@ function uniquePaths(grid) {
     }
   }
 
-  return dp[m - 1][n - 1]
+  return getPath(dp, m - 1, n - 1)
+}
+
+function getPath(dp, i, j, path) {
+  let path = []
+  if (i === 0 && j === 0) {
+    return path.push([i, j])
+  } else if (i === 0) {
+    path = getPath(dp, i, j - 1 , path)
+  } else if (j === 0) {
+    path = getPath(dp, i - 1, j, path)
+  } else {
+    if (dp[i - 1][j] > dp[i][j - 1]) {
+      path = getPath(dp, i - 1, j, path)
+    } else {
+      path = getPath(dp, i, j - 1, path)
+    }
+  }
+
+  return path.push([i, j])
+}
+
+// ---------------- painting fences --------------
+
+/*
+Problem:
+	Paint Fence With Two Colors
+	There is a fence with n posts, each post can be painted with either green or blue color.
+	You have to paint all the posts such that no more than two adjacent fence posts have the same color.
+	Return the total number of ways you can paint the fence.
+*/
+
+function numWays(n) {
+  let dp = []
+
+  for (let i = 0; i < n + 1; i++) {
+    let r = []
+    dp.push(r)
+  }
+
+  // green = 1
+  // blue = 0
+
+  dp[1][0] = 1
+  dp[1][1]= 1
+  dp[2][0] = 2 // 10, 00
+  dp[2][1] = 2 // 01, 11
+
+  for (let i = 3; i <= n; i++) {
+    for (let j = 0; j <= 1; j++) {
+      dp[i][j] = dp[i - 1][1 - j] + dp[i - 2][1 - j]
+    }
+  }
+
+  return dp[n][0] + dp[n][1]
 }
